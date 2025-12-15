@@ -1,15 +1,15 @@
 import numpy as np
 
 class Game:
-    __c = [20, 50, 100, 200, 500, 750, 1000]
+    c = [20, 50, 100, 200, 500, 750, 1000]
 
     """Abstract Game class object used as template for other Games."""
-    def __init__(self, lights: int = 12, weights: list[int]|list[float]|None = None, initial_bank: int = 10000):
+    def __init__(self, lights: int = 12, weights: list[int]|list[float]|None = None, initial_bank: int = 10000, prize_poll: list[int]|None = None):
         self.lights = lights if lights >= 12 else 12
         self.weights = weights if weights != None else [1 / lights] * lights
         self.players = []
         self.selected = 0
-        self.prize_poll = [np.random.choice(self.__c) for _ in range(self.lights)]
+        self.prize_poll = prize_poll if (prize_poll != None and len(prize_poll) == lights) else [np.random.choice(self.c) for _ in range(self.lights)]
         self.initial_bank = initial_bank
     
     def bet(self, player: int, amount: int, slot: int):
@@ -19,8 +19,8 @@ class Game:
         raise NotImplementedError()
 
 class FairGame(Game):
-    def __init__(self, lights: int = 12, initial_bank: int = 10000):
-        super(FairGame, self).__init__(lights, initial_bank = initial_bank)
+    def __init__(self, lights: int = 12, initial_bank: int = 10000, prize_poll: list[int]|None = None):
+        super(FairGame, self).__init__(lights, initial_bank = initial_bank, prize_poll = prize_poll)
     
     def bet(self, player: int, amount: int, slot: int) -> None:
         if len(self.players) > 0:
@@ -54,8 +54,8 @@ class FairGame(Game):
             return {}
 
 class TweakedGame(Game):
-    def __init__(self, lights: int = 12, weights: list[int]|list[float]|None = None, initial_bank: int = 10000):
-        super(TweakedGame, self).__init__(lights, weights = weights, initial_bank = initial_bank)
+    def __init__(self, lights: int = 12, weights: list[int]|list[float]|None = None, initial_bank: int = 10000, prize_poll: list[int]|None = None):
+        super(TweakedGame, self).__init__(lights, weights = weights, initial_bank = initial_bank, prize_poll = prize_poll)
     
     def bet(self, player: int, amount: int, slot: int) -> None:
         if len(self.players) > 0:

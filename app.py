@@ -30,6 +30,7 @@ pg = st.navigation(
     ]
 )
 
+st.session_state.pages = pg
 
 # ================== PAGE STYLE ==================
 # Inject custom CSS to style the Streamlit app
@@ -37,12 +38,11 @@ pg = st.navigation(
 st.markdown("""
 <style>
 body { background-color: #0e0e0e; }
-h1, h2, h3 { text-align: center; }
 button { height: 3em; width: 100%; font-size: 18px; }
 </style>
 """, unsafe_allow_html=True)
 
 # Main application title
-st.title(":material/attractions: Stochastic Bulb Wheel Game")
+st.title(":material/attractions: Stochastic Bulb Wheel Game", text_alignment = "center")
 
 pg.run()
