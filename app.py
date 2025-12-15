@@ -2,24 +2,6 @@
 # Streamlit is used to build the interactive web app
 import streamlit as st
 
-# Matplotlib is used to draw the wheel visualization
-import matplotlib.pyplot as plt
-
-# NumPy handles probability modeling and random selection
-import numpy as np
-
-# Pandas is used for data aggregation and analysis in simulations
-import pandas as pd
-
-# Time is used to create animation delays
-import time
-
-# Random is used only for visual spin length (not probability logic)
-import random
-
-# Simulation contains the game models and the simulator for the web app
-import simulation as sim
-
 # ======== PAGES SETUP =============
 # This section defines and includes the pages for the web apps.
 pg = st.navigation(
